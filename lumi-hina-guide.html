@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi & Hina – How To 🐱</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lavender: #c9b8f0;
+    --lavender-light: #ede8ff;
+    --lavender-pale: #f5f0ff;
+    --mint: #b5e5d8;
+    --mint-light: #e2f7f1;
+    --mint-pale: #f0fbf8;
+    --pink: #f7b8cc;
+    --pink-light: #fde8ef;
+    --pink-pale: #fff3f7;
+    --peach: #ffd6b5;
+    --peach-light: #fff0e4;
+    --yellow: #fff0a0;
+    --text-dark: #3d2c5e;
+    --text-mid: #6b5a8e;
+    --text-soft: #9b8ab8;
+    --white: #ffffff;
+    --radius-xl: 28px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --shadow-soft: 0 8px 32px rgba(100,80,160,0.10);
+    --shadow-card: 0 4px 20px rgba(100,80,160,0.13);
+    --shadow-hover: 0 10px 36px rgba(100,80,160,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--lavender-pale);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── PAGE SYSTEM ── */
+  .page { display: none; min-height: 100vh; animation: fadeIn 0.4s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── GLOBAL NAV ── */
+  .nav {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--lavender-light);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: transform 0.2s;
+    white-space: nowrap;
+  }
+  .nav-logo:hover { transform: scale(1.05); }
+
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-btn {
+    background: var(--lavender-light);
+    border: none;
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { background: var(--lavender); color: var(--text-dark); transform: translateY(-1px); }
+  .nav-btn.active { background: var(--lavender); color: var(--text-dark); }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 2px solid var(--lavender);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .back-btn:hover { background: var(--lavender-light); transform: translateX(-3px); }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    background: linear-gradient(135deg, var(--lavender-light) 0%, var(--pink-light) 50%, var(--mint-light) 100%);
+    padding: 60px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, var(--pink-light) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--mint-light) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    color: var(--text-dark);
+    line-height: 1.2;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, #a084dc, #e06fa0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    margin-top: 12px;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── PHOTO PLACEHOLDER ── */
+  .photo-placeholder {
+    background: linear-gradient(135deg, var(--lavender-light), var(--pink-light));
+    border: 3px dashed var(--lavender);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-soft);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-placeholder:hover {
+    border-color: var(--lavender);
+    background: linear-gradient(135deg, var(--lavender-light), var(--mint-light));
+    transform: scale(1.01);
+  }
+  .photo-placeholder .ph-icon { font-size: 2.4rem; }
+  .photo-placeholder.hero-ph { height: 320px; width: 100%; max-width: 600px; margin: 28px auto 0; }
+  .photo-placeholder.card-ph { height: 200px; width: 100%; }
+  .photo-placeholder.sm-ph { height: 140px; width: 100%; }
+
+  /* ── VIDEO PLACEHOLDER ── */
+  .video-placeholder {
+    background: linear-gradient(135deg, #2d1f4a, #4a2d6b);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  .video-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(180,140,255,0.15), rgba(255,140,180,0.15));
+  }
+  .video-placeholder:hover { transform: scale(1.01); box-shadow: var(--shadow-hover); }
+  .video-placeholder .play-btn {
+    width: 60px; height: 60px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    border: 2px solid rgba(255,255,255,0.3);
+    position: relative; z-index: 1;
+  }
+  .video-placeholder p { position: relative; z-index: 1; font-size: 0.88rem; opacity: 0.9; }
+  .video-placeholder.tall { height: 220px; }
+  .video-placeholder.short { height: 160px; }
+
+  /* ── PAGE CONTAINER ── */
+  .page-container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .section-icon {
+    font-size: 2.4rem;
+    width: 62px; height: 62px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: var(--text-dark);
+    line-height: 1.2;
+  }
+  .section-title small {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-soft);
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 26px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 640px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── HOME TILES ── */
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .tile {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 28px 20px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: var(--shadow-card);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+  .tile:nth-child(1)::before { background: linear-gradient(90deg, var(--pink), var(--peach)); }
+  .tile:nth-child(2)::before { background: linear-gradient(90deg, var(--mint), #8ee8c0); }
+  .tile:nth-child(3)::before { background: linear-gradient(90deg, var(--lavender), #b8a0f0); }
+  .tile:nth-child(4)::before { background: linear-gradient(90deg, var(--peach), var(--yellow)); }
+  .tile:nth-child(5)::before { background: linear-gradient(90deg, #f0b8d8, #f7b8cc); }
+  .tile:nth-child(6)::before { background: linear-gradient(90deg, #ff9999, #ffb8a0); }
+  .tile:nth-child(7)::before { background: linear-gradient(90deg, #b8e0f7, var(--mint)); }
+  .tile:nth-child(8)::before { background: linear-gradient(90deg, #d0f0b8, var(--mint)); }
+  .tile:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--lavender);
+  }
+  .tile-icon { font-size: 2.8rem; margin-bottom: 10px; }
+  .tile-label {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+  .tile-sub {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* ── INFO PILLS ── */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--lavender-light);
+    border-radius: 50px;
+    padding: 7px 16px;
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    margin: 4px;
+  }
+  .pill.green { background: var(--mint-light); color: #3a8a6b; }
+  .pill.pink { background: var(--pink-light); color: #a04070; }
+  .pill.red { background: #ffe0e0; color: #c04040; }
+  .pill.yellow { background: var(--yellow); color: #7a6800; }
+
+  /* ── INFO LIST ── */
+  .info-list { list-style: none; }
+  .info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--lavender-pale);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    font-weight: 600;
+    color: var(--text-mid);
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list li .li-icon { flex-shrink: 0; font-size: 1.1rem; margin-top: 1px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .highlight-box.lavender { background: var(--lavender-pale); border-left: 4px solid var(--lavender); color: var(--text-mid); }
+  .highlight-box.mint { background: var(--mint-pale); border-left: 4px solid var(--mint); color: #2a7a5a; }
+  .highlight-box.pink { background: var(--pink-pale); border-left: 4px solid var(--pink); color: #904060; }
+  .highlight-box.warning { background: #fff3e0; border-left: 4px solid #ffb347; color: #7a4f00; }
+
+  /* ── TIME BADGE ── */
+  .time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--text-dark);
+    color: white;
+    border-radius: 50px;
+    padding: 5px 14px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  /* ── ROUTINE STEPS ── */
+  .step-list { list-style: none; counter-reset: steps; }
+  .step-list li {
+    counter-increment: steps;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--lavender);
+    font-weight: 600;
+    color: var(--text-mid);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--lavender), var(--pink));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── CAT PROFILE ── */
+  .cat-profile-header {
+    background: linear-gradient(135deg, var(--lavender-light), var(--pink-light));
+    border-radius: var(--radius-xl);
+    padding: 32px 28px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-profile-header::after {
+    content: '🐱';
+    position: absolute;
+    right: -10px; top: -10px;
+    font-size: 6rem;
+    opacity: 0.08;
+  }
+  .cat-profile-photo {
+    width: 130px; height: 130px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+  .cat-profile-info h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+  }
+  .cat-profile-info p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  /* ── NONO LIST ── */
+  .nono-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: #fff5f5;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border-left: 4px solid #ffb8b8;
+  }
+  .nono-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .nono-text { font-weight: 700; color: var(--text-dark); font-size: 0.9rem; }
+  .nono-tip { font-size: 0.8rem; color: var(--text-soft); font-weight: 600; margin-top: 2px; }
+
+  /* ── WELCOME BAND ── */
+  .welcome-band {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 24px 28px;
+    box-shadow: var(--shadow-soft);
+    max-width: 600px;
+    margin: 24px auto 0;
+    text-align: center;
+  }
+  .welcome-band p {
+    color: var(--text-mid);
+    font-weight: 600;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  /* ── DECORATIVE CATS ── */
+  .deco-cats {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 16px 0;
+    font-size: 1.6rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 520px) {
+    .cat-profile-header { flex-direction: column; text-align: center; }
+    .cat-profile-photo { width: 100px; height: 100px; }
+    .tiles-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+  }
+
+  /* ── FOOTER PAWS ── */
+  .page-footer {
+    text-align: center;
+    padding: 12px;
+    font-size: 1.5rem;
+    opacity: 0.3;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lavender), transparent);
+    margin: 28px 0;
+  }
+
+  /* ── TAG ROW ── */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+  /* ── PLACE CHIP ── */
+  .place-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--mint-light);
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #2a6a50;
+    margin-bottom: 8px;
+  }
+
+  /* ── INPUT STYLE ── */
+  .edit-note {
+    background: var(--yellow);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #7a6000;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 – HOME
+═══════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="deco-cats">🐱 🌸 🐾 🌿 🐱</div>
+    <h1 class="hero-title">Lumi & Hina<br><span>How To</span></h1>
+    <p class="hero-subtitle">Dein Katzensitter-Handbuch für die zwei Schönsten 💜</p>
+    <div class="photo-placeholder hero-ph">
+      <span class="ph-icon">📸</span>
+      <span>Foto von Lumi & Hina hier einfügen</span>
+      <small style="opacity:0.7;font-weight:600;">Ihr gemeinsames Hero-Foto</small>
+    </div>
+  </div>
+
+  <div class="page-container">
+    <div class="welcome-band">
+      <p>Willkommen! 🎉 Hier findest du alles, was du brauchst, um Lumi & Hina glücklich zu machen – von Fütterung über Spielzeit bis zu ihren kleinen Eigenheiten. Klick dich einfach durch!</p>
+    </div>
+
+    <div class="tiles-grid">
+      <div class="tile" onclick="showPage('page-fuettern')">
+        <div class="tile-icon">🍽️</div>
+        <div class="tile-label">Füttern</div>
+        <div class="tile-sub">Zeiten & Mengen</div>
+      </div>
+      <div class="tile" onclick="showPage('page-spielen')">
+        <div class="tile-icon">🎣</div>
+        <div class="tile-label">Spielen</div>
+        <div class="tile-sub">Tipps & Spielzeug</div>
+      </div>
+      <div class="tile" onclick="showPage('page-routine')">
+        <div class="tile-icon">🌙</div>
+        <div class="tile-label">Abendroutine</div>
+        <div class="tile-sub">Ablauf & Timing</div>
+      </div>
+      <div class="tile" onclick="showPage('page-lumi')">
+        <div class="tile-icon">🐱</div>
+        <div class="tile-label">Alles zu Lumi</div>
+        <div class="tile-sub">Charakter & Lieblinge</div>
+      </div>
+      <div class="tile" onclick="showPage('page-hina')">
+        <div class="tile-icon">🐱</div>
+        <div class="tile-label">Alles zu Hina</div>
+        <div class="tile-sub">Charakter & Lieblinge</div>
+      </div>
+      <div class="tile" onclick="showPage('page-nonos')">
+        <div class="tile-icon">🚫</div>
+        <div class="tile-label">No-No's</div>
+        <div class="tile-sub">Was besser nicht…</div>
+      </div>
+      <div class="tile" onclick="showPage('page-klo')">
+        <div class="tile-icon">🧹</div>
+        <div class="tile-label">Klo & Wasser</div>
+        <div class="tile-sub">Pflege & Hygiene</div>
+      </div>
+      <div class="tile" onclick="showPage('page-balkon')">
+        <div class="tile-icon">🌿</div>
+        <div class="tile-label">Balkon & Fenster</div>
+        <div class="tile-sub">Regeln & Sicherheit</div>
+      </div>
+    </div>
+
+    <div class="page-footer">🐾 🐾 🐾</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 – FÜTTERN
+═══════════════════════════════════════════ -->
+<div id="page-fuettern" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn" onclick="showPage('page-spielen')">🎣 Spielen</button>
+      <button class="nav-btn" onclick="showPage('page-routine')">🌙 Routine</button>
+      <button class="nav-btn" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn" onclick="showPage('page-hina')">🐱 Hina</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="section-header">
+      <div class="section-icon">🍽️</div>
+      <div class="section-title">Füttern<small>So bleiben die zwei satt & glücklich</small></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span>🌙</span> Nachts & Mittags</div>
+        <div class="highlight-box lavender">Trockenfutter läuft automatisch – da musst du nichts machen! ✨</div>
+        <div class="info-list" style="list-style:none;">
+          <li class="info-list li"><span class="li-icon">🤖</span><span>Automatischer Futterautomat erledigt alles</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>🌅</span> Morgens & Abends</div>
+        <div class="highlight-box pink">80g Nassfutter pro Napf – für jeden!</div>
+        <ul class="info-list">
+          <li><span class="li-icon">⚖️</span><span>Waage steht oben bereit</span></li>
+          <li><span class="li-icon">🗄️</span><span>Nassfutter in der großen Schublade</span></li>
+          <li><span class="li-icon">🧊</span><span>Offenes Futter im Kühlschrank mit Klipper lagern</span></li>
+          <li><span class="li-icon">🗑️</span><span>Reste wegwerfen + Napf sauber machen</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>📅</span> Übersicht Fütterungszeiten</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+        <div class="time-badge">🌙 Nachts – Trockenfutter (Auto)</div>
+        <div class="time-badge">☀️ Mittags – Trockenfutter (Auto)</div>
+        <div class="time-badge" style="background:var(--text-mid);">🌅 Morgens – 80g Nassfutter</div>
+        <div class="time-badge" style="background:var(--text-mid);">🌆 Abends – 80g Nassfutter</div>
+      </div>
+      <div class="photo-placeholder card-ph">
+        <span class="ph-icon">📸</span>
+        <span>Foto der Futter-Station einfügen</span>
+        <small style="opacity:0.7">Zeig wo alles steht!</small>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎬</span> Video-Anleitung</div>
+      <div class="video-placeholder tall">
+        <div class="play-btn">▶</div>
+        <p>Video-Anleitung: Nassfutter abwiegen & einsetzen</p>
+        <small style="opacity:0.6">Link oder Embed hier einfügen</small>
+      </div>
+    </div>
+
+    <div class="edit-note">✏️ Hier kannst du weitere Fütterungshinweise ergänzen – z.B. Sonderwünsche, Lieblingsgeschmack etc.</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 – SPIELEN
+═══════════════════════════════════════════ -->
+<div id="page-spielen" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn active" onclick="showPage('page-spielen')">🎣 Spielen</button>
+      <button class="nav-btn" onclick="showPage('page-routine')">🌙 Routine</button>
+      <button class="nav-btn" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn" onclick="showPage('page-hina')">🐱 Hina</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="section-header">
+      <div class="section-icon">🎣</div>
+      <div class="section-title">Spielen<small>Angeln, Rennen & Springen</small></div>
+    </div>
+
+    <div class="highlight-box lavender">
+      🎉 Beide lieben die <strong>Angeln</strong>! Meistens ziehen sie dich mit ihrem Spielzeug in einen anderen Raum. Die Angeln findest du in der <strong>Küche im Schrank</strong>.
+    </div>
+
+    <div class="highlight-box warning">
+      ⚠️ <strong>Wichtig:</strong> Beide können nicht aufhören zu spielen – sie spielen bis sie hecheln! Hecheln ist bei Katzen nicht gut. Bitte auf die Atmung achten und das Spiel rechtzeitig unterbrechen. Lumi max. ~3 Minuten, Hina etwas länger (sie macht Pausen).
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span>🏃</span> Lumi mag…</div>
+        <div class="highlight-box pink">Will vor allem <strong>rennen!</strong></div>
+        <ul class="info-list">
+          <li><span class="li-icon">🔴</span><span>Rotes Stoff-Spielzeug an der Angel</span></li>
+          <li><span class="li-icon">🪢</span><span>Haargummi an der Angel befestigen</span></li>
+          <li><span class="li-icon">✋</span><span>Spielt gern mit der Hand</span></li>
+          <li><span class="li-icon">🪶</span><span>Federspielzeug & Kratzbaum</span></li>
+        </ul>
+        <div class="photo-placeholder sm-ph" style="margin-top:14px;">
+          <span class="ph-icon">📸</span>
+          <span>Foto: Lumi beim Spielen</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>🦘</span> Hina mag…</div>
+        <div class="highlight-box mint">Spielt <strong>lange mit Pausen</strong> & will <strong>springen!</strong></div>
+        <ul class="info-list">
+          <li><span class="li-icon">🧾</span><span>Angel mit zerknüddeltem Kassenbon</span></li>
+          <li><span class="li-icon">🪢</span><span>Haargummis als Spielzeug</span></li>
+          <li><span class="li-icon">⏸️</span><span>Pausen einplanen – sie hört selbst kurz auf</span></li>
+          <li><span class="li-icon">👑</span><span>Kommt zu dir wenn sie gespielt werden will</span></li>
+        </ul>
+        <div class="photo-placeholder sm-ph" style="margin-top:14px;">
+          <span class="ph-icon">📸</span>
+          <span>Foto: Hina beim Spielen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>📦</span> Spielzeug-Fundorte</div>
+      <div class="place-chip">🍳 Küche im Schrank – hier sind alle Angeln</div>
+      <div class="edit-note">✏️ Weitere Spielzeuge und ihre Orte hier ergänzen</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎬</span> Video: Spielsession</div>
+      <div class="video-placeholder tall">
+        <div class="play-btn">▶</div>
+        <p>Video: So spielst du mit Lumi & Hina</p>
+        <small style="opacity:0.6">YouTube/Video-Link hier einfügen</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 – ABENDROUTINE
+═══════════════════════════════════════════ -->
+<div id="page-routine" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn" onclick="showPage('page-spielen')">🎣 Spielen</button>
+      <button class="nav-btn active" onclick="showPage('page-routine')">🌙 Routine</button>
+      <button class="nav-btn" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn" onclick="showPage('page-hina')">🐱 Hina</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="section-header">
+      <div class="section-icon">🌙</div>
+      <div class="section-title">Abendroutine<small>Der tägliche Abend-Ablauf</small></div>
+    </div>
+
+    <div class="highlight-box lavender">
+      ✨ Abends verläuft es immer gleich – so fühlen sich Lumi & Hina wohl und sicher. Starte <strong>gegen 20 Uhr</strong>!
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>📋</span> Schritt-für-Schritt Ablauf</div>
+      <ol class="step-list">
+        <li>
+          <div class="step-num">1</div>
+          <div><strong>Zuerst mit Lumi spielen</strong> – ca. 8 Uhr. Angel mit rotem Stoff-Spielzeug + Haargummi. Max. ~3 Minuten, auf Atmung achten!</div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div><strong>Dann mit Hina spielen</strong> – Angel mit Kassenbon. Sie macht selbst Pausen, aber trotzdem im Blick behalten.</div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div><strong>1 Schleckie aufteilen</strong> – ein Schleckie für beide zusammen! Nicht je eines.</div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div><strong>Nassfutter geben</strong> – 80g pro Napf, abwiegen nicht vergessen.</div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="grid-2">
+      <div class="photo-placeholder card-ph">
+        <span class="ph-icon">📸</span>
+        <span>Foto: Abendstimmung mit Lumi & Hina</span>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>⏰</span> Timing</div>
+        <div class="time-badge" style="margin-bottom:10px;">⏰ ~20:00 Uhr starten</div>
+        <ul class="info-list">
+          <li><span class="li-icon">🐱</span><span>Erst Lumi, dann Hina</span></li>
+          <li><span class="li-icon">🍬</span><span>1 Schleckie aufteilen</span></li>
+          <li><span class="li-icon">🍲</span><span>Danach Nassfutter</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎬</span> Video: Abend-Routine</div>
+      <div class="video-placeholder tall">
+        <div class="play-btn">▶</div>
+        <p>Video: Schritt für Schritt durch die Abendroutine</p>
+        <small style="opacity:0.6">Video-Link hier einfügen</small>
+      </div>
+    </div>
+
+    <div class="edit-note">✏️ Weitere Abend-Tipps oder Besonderheiten hier ergänzen</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 5 – LUMI
+═══════════════════════════════════════════ -->
+<div id="page-lumi" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn" onclick="showPage('page-spielen')">🎣 Spielen</button>
+      <button class="nav-btn" onclick="showPage('page-routine')">🌙 Routine</button>
+      <button class="nav-btn active" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn" onclick="showPage('page-hina')">🐱 Hina</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="cat-profile-header" style="background: linear-gradient(135deg, var(--lavender-light), var(--peach-light));">
+      <div class="cat-profile-photo">
+        <div class="photo-placeholder" style="height:100%;border-radius:50%;border:none;">
+          <span style="font-size:2.5rem;">🐱</span>
+        </div>
+      </div>
+      <div class="cat-profile-info">
+        <h2>Lumi</h2>
+        <p>Die aktive Rennerin 🏃‍♀️<br>Immer bereit für ein Spiel!</p>
+        <div class="tag-row" style="margin-top:8px;">
+          <span class="pill">🏃 Rennen</span>
+          <span class="pill pink">💜 Schmusen</span>
+          <span class="pill green">🌿 Büro-Fan</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span>✨</span> Charakter</div>
+        <ul class="info-list">
+          <li><span class="li-icon">🤗</span><span>Wenn sie in Reichweite liegt, darf man sie streicheln</span></li>
+          <li><span class="li-icon">🎮</span><span>Kann beim Streicheln plötzlich in Spiellaune kommen</span></li>
+          <li><span class="li-icon">🏃</span><span>Liebt es zu rennen – die Energie-Queen!</span></li>
+          <li><span class="li-icon">🪶</span><span>Spielt mit Hand, Federn, am Kratzbaum</span></li>
+          <li><span class="li-icon">😊</span><span>Relativ unkompliziert im Spielen</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>📍</span> Lieblingsorte</div>
+        <div class="place-chip">💻 Büro – auf dem Sideboard</div>
+        <div class="place-chip">🪜 Kratzbaum</div>
+        <div class="place-chip">📦 Kallax Regal</div>
+        <div class="highlight-box warning" style="margin-top:14px;">
+          ⚠️ <strong>Achtung:</strong> Lumi legt sich oft <strong>mitten in den Flur</strong>, wenn es dunkel ist!
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎣</span> So spielst du mit Lumi</div>
+      <div class="highlight-box lavender">Rotes Stoff-Spielzeug an der Angel mit <strong>Haargummi</strong> dran – dann einfach rennen lassen!</div>
+      <div class="highlight-box warning">Max. <strong>~3 Minuten</strong> am Stück spielen – auf Hecheln achten!</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>📸</span> Lumi's Fotoalbum</div>
+      <div class="grid-2">
+        <div class="photo-placeholder card-ph">
+          <span class="ph-icon">📸</span>
+          <span>Lumi beim Spielen</span>
+        </div>
+        <div class="photo-placeholder card-ph">
+          <span class="ph-icon">📸</span>
+          <span>Lumi auf ihrem Lieblingsplatz</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎬</span> Video: Alles zu Lumi</div>
+      <div class="video-placeholder tall">
+        <div class="play-btn">▶</div>
+        <p>Video: Lumi's Eigenheiten & Tipps</p>
+        <small style="opacity:0.6">Video-Link hier einfügen</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 6 – HINA
+═══════════════════════════════════════════ -->
+<div id="page-hina" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn" onclick="showPage('page-spielen')">🎣 Spielen</button>
+      <button class="nav-btn" onclick="showPage('page-routine')">🌙 Routine</button>
+      <button class="nav-btn" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn active" onclick="showPage('page-hina')">🐱 Hina</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="cat-profile-header" style="background: linear-gradient(135deg, var(--mint-light), var(--pink-light));">
+      <div class="cat-profile-photo">
+        <div class="photo-placeholder" style="height:100%;border-radius:50%;border:none;">
+          <span style="font-size:2.5rem;">🐱</span>
+        </div>
+      </div>
+      <div class="cat-profile-info">
+        <h2>Hina</h2>
+        <p>Die kleine Diva 👑<br>Spielt lang, ruht gern!</p>
+        <div class="tag-row" style="margin-top:8px;">
+          <span class="pill green">🦘 Springen</span>
+          <span class="pill pink">👑 Diva</span>
+          <span class="pill">⏸️ Mit Pausen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span>✨</span> Charakter</div>
+        <ul class="info-list">
+          <li><span class="li-icon">👑</span><span>Kommt zu dir wenn sie gestreichelt werden möchte (kleine Diva 😁)</span></li>
+          <li><span class="li-icon">🤗</span><span>Mag es manchmal getragen zu werden – Bauch oben, damit sie sich ausstrecken kann</span></li>
+          <li><span class="li-icon">⏸️</span><span>Semi-aktiv – spielt gern, aber mit Pausen</span></li>
+          <li><span class="li-icon">🦘</span><span>Will beim Spielen springen!</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>📍</span> Lieblingsorte</div>
+        <div class="place-chip">🖥️ Büro – am Fenster</div>
+        <div class="place-chip">🪟 Hinter dem Vorhang im Wohnzimmer</div>
+        <div class="place-chip">🛏️ Auf dem Schrank im Schlafzimmer</div>
+        <div class="edit-note">✏️ Weitere Lieblingsorte hier ergänzen</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎣</span> So spielst du mit Hina</div>
+      <div class="highlight-box mint">Angel mit <strong>Kassenbon</strong> – sie springt sehr gerne!</div>
+      <ul class="info-list">
+        <li><span class="li-icon">🪢</span><span>Haargummis sind Lieblingsspielzeug</span></li>
+        <li><span class="li-icon">🧾</span><span>Zerknüddelte Kassenbons als Spielzeug</span></li>
+        <li><span class="li-icon">⏸️</span><span>Pausen gehören dazu – einfach warten</span></li>
+      </ul>
+      <div class="highlight-box warning" style="margin-top:14px;">Trotz Pausen: Hecheln im Blick behalten!</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>📸</span> Hina's Fotoalbum</div>
+      <div class="grid-2">
+        <div class="photo-placeholder card-ph">
+          <span class="ph-icon">📸</span>
+          <span>Hina beim Spielen</span>
+        </div>
+        <div class="photo-placeholder card-ph">
+          <span class="ph-icon">📸</span>
+          <span>Hina auf ihrem Lieblingsplatz</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎬</span> Video: Alles zu Hina</div>
+      <div class="video-placeholder tall">
+        <div class="play-btn">▶</div>
+        <p>Video: Hina's Eigenheiten & Tipps</p>
+        <small style="opacity:0.6">Video-Link hier einfügen</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 7 – NO-NOS
+═══════════════════════════════════════════ -->
+<div id="page-nonos" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn" onclick="showPage('page-spielen')">🎣 Spielen</button>
+      <button class="nav-btn" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn" onclick="showPage('page-hina')">🐱 Hina</button>
+      <button class="nav-btn active" onclick="showPage('page-nonos')">🚫 No-No's</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="section-header">
+      <div class="section-icon">🚫</div>
+      <div class="section-title">No-No's<small>Was besser nicht passieren sollte…</small></div>
+    </div>
+
+    <div class="highlight-box lavender">
+      💡 <strong>Gut zu wissen:</strong> Meistens reicht ein „<strong>sssst</strong>" Geräusch + ihr Name, um unerwünschtes Verhalten zu stoppen!
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🌱</span> Die No-No's</div>
+      <div class="nono-item">
+        <span class="nono-icon">🌿</span>
+        <div>
+          <div class="nono-text">Mit Pflanzen spielen oder anknabbern</div>
+          <div class="nono-tip">Kann für Katzen gefährlich sein</div>
+        </div>
+      </div>
+      <div class="nono-item">
+        <span class="nono-icon">🪴</span>
+        <div>
+          <div class="nono-text">In der Erde buddeln</div>
+          <div class="nono-tip">Macht Unordnung und Erde kann Keime enthalten</div>
+        </div>
+      </div>
+      <div class="nono-item">
+        <span class="nono-icon">🍳</span>
+        <div>
+          <div class="nono-text">Auf den Küchentisch gehen</div>
+          <div class="nono-tip">Hygiene-No-No!</div>
+        </div>
+      </div>
+      <div class="nono-item">
+        <span class="nono-icon">🛋️</span>
+        <div>
+          <div class="nono-text">An Möbeln & Wänden kratzen</div>
+          <div class="nono-tip">Zum Kratzbaum umlenken</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>💬</span> Was hilft?</div>
+      <div class="highlight-box mint">
+        🔊 <strong>„sssst"</strong> + ihren Namen rufen – das funktioniert meistens sehr gut!
+      </div>
+      <div class="edit-note">✏️ Weitere Tipps oder persönliche No-No's hier ergänzen</div>
+    </div>
+
+    <div class="photo-placeholder card-ph">
+      <span class="ph-icon">📸</span>
+      <span>Foto: Lumi oder Hina im Modus „Hab ich was gemacht?" 😄</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 8 – KATZENKLO & WASSER
+═══════════════════════════════════════════ -->
+<div id="page-klo" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn active" onclick="showPage('page-klo')">🧹 Klo & Wasser</button>
+      <button class="nav-btn" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn" onclick="showPage('page-hina')">🐱 Hina</button>
+      <button class="nav-btn" onclick="showPage('page-balkon')">🌿 Balkon</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="section-header">
+      <div class="section-icon">🧹</div>
+      <div class="section-title">Klo & Wasser<small>Sauberkeit ist Katzenpflicht!</small></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span>🚽</span> Katzenklo</div>
+        <div class="highlight-box lavender">Nur <strong>ein Katzenklo</strong> vorhanden – daher muss es oft sauber gemacht werden!</div>
+        <ul class="info-list">
+          <li><span class="li-icon">🧹</span><span>So oft es geht sauber machen</span></li>
+          <li><span class="li-icon">🗑️</span><span>Kleiner Mülleimer steht nebenan – gelegentlich leeren</span></li>
+        </ul>
+        <div class="photo-placeholder sm-ph" style="margin-top:14px;">
+          <span class="ph-icon">📸</span>
+          <span>Foto: Katzenklo und Mülleimer</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>💧</span> Wassernäpfe</div>
+        <div class="highlight-box mint">Es gibt <strong>zwei Wassernäpfe</strong> – Wohnzimmer & Office.</div>
+        <ul class="info-list">
+          <li><span class="li-icon">🏠</span><span>Wohnzimmer-Napf – läuft normal</span></li>
+          <li><span class="li-icon">💻</span><span>Office-Napf – gelegentlich kurz ausspülen und erneuern</span></li>
+        </ul>
+        <div class="photo-placeholder sm-ph" style="margin-top:14px;">
+          <span class="ph-icon">📸</span>
+          <span>Foto: Wassernäpfe</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎬</span> Video: Klo reinigen</div>
+      <div class="video-placeholder tall">
+        <div class="play-btn">▶</div>
+        <p>Video: Katzenklo sauber machen – Step by Step</p>
+        <small style="opacity:0.6">Video-Link hier einfügen</small>
+      </div>
+    </div>
+
+    <div class="edit-note">✏️ Weitere Pflegehinweise oder Besonderheiten hier ergänzen</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 9 – BALKON & FENSTER
+═══════════════════════════════════════════ -->
+<div id="page-balkon" class="page">
+  <nav class="nav">
+    <span class="nav-logo" onclick="showPage('page-home')">🐱 Lumi & Hina</span>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showPage('page-fuettern')">🍽️ Füttern</button>
+      <button class="nav-btn" onclick="showPage('page-klo')">🧹 Klo & Wasser</button>
+      <button class="nav-btn" onclick="showPage('page-lumi')">🐱 Lumi</button>
+      <button class="nav-btn" onclick="showPage('page-hina')">🐱 Hina</button>
+      <button class="nav-btn active" onclick="showPage('page-balkon')">🌿 Balkon</button>
+    </div>
+    <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+  </nav>
+
+  <div class="page-container">
+    <div class="section-header">
+      <div class="section-icon">🌿</div>
+      <div class="section-title">Balkon & Fenster<small>Frische Luft mit Regeln!</small></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span>🌤️</span> Balkon</div>
+        <div class="highlight-box mint">Die Katzen dürfen auf den Balkon, <strong>wenn das Wetter gut ist!</strong></div>
+        <ul class="info-list">
+          <li><span class="li-icon">✅</span><span>Balkon erlaubt bei gutem Wetter</span></li>
+          <li><span class="li-icon">⚠️</span><span>Hina versucht manchmal auszubrechen!</span></li>
+          <li><span class="li-icon">🏠</span><span>Wenn es zu sehr stört – Katzen einfach wieder reinholen</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>🪟</span> Fenster</div>
+        <div class="highlight-box warning">
+          ⚠️ <strong>Fenster müssen geschlossen bleiben!</strong>
+        </div>
+        <ul class="info-list">
+          <li><span class="li-icon">🚪</span><span>Alle Fenster geschlossen halten</span></li>
+          <li><span class="li-icon">🛏️</span><span>Schlafzimmer hat ein Netz – nur unter Aufsicht öffnen</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>📸</span> Balkon-Fotos</div>
+      <div class="grid-2">
+        <div class="photo-placeholder card-ph">
+          <span class="ph-icon">📸</span>
+          <span>Foto: Balkon-Bereich</span>
+        </div>
+        <div class="photo-placeholder card-ph">
+          <span class="ph-icon">📸</span>
+          <span>Foto: Fenster mit Netz im Schlafzimmer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>🎬</span> Video: Balkon & Fenster</div>
+      <div class="video-placeholder tall">
+        <div class="play-btn">▶</div>
+        <p>Video: Balkon-Regeln & Fenster-Situation zeigen</p>
+        <small style="opacity:0.6">Video-Link hier einfügen</small>
+      </div>
+    </div>
+
+    <div class="edit-note">✏️ Weitere Regeln oder Hinweise zum Außenbereich hier ergänzen</div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <button class="back-btn" onclick="showPage('page-home')" style="font-size:1rem;padding:14px 32px;">
+        🏠 Zurück zur Startseite
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(pageId);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+</script>
+
+</body>
+</html>
